@@ -1,9 +1,11 @@
 <?php
 
+
 use App\Http\Controllers\LatihanController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,18 +19,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::get('/dashboard', function () {
     return view('dashboard.index');
-});
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('post', PostController::class);
-Route::resource('category', CategoryController::class);
+require __DIR__ . '/auth.php';
 
 
-Route::get('/latihan', [LatihanController::class, 'showMyname']);
+Route::resource('post', PostController::class)->middleware(['auth', 'verified']);
+Route::resource('category', CategoryController::class)->middleware(['auth', 'verified']);
+
+
+Route::get('/latihan', [LatihanController::class, 'showMyname'])->middleware(['auth', 'verified']);;
 
 // Route::get('/post', [PostController::class, 'index']);
 // Route::post('/post', [PostController::class, 'store']);
