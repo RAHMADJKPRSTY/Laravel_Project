@@ -82,6 +82,7 @@
                                     <th>Photo</th>
                                     <th>Title</th>
                                     <th>Category</th>
+                                    <th>Author</th>
                                     <th>Status</th>
                                     <th>CreatedAt</th>
                                     <th>Action</th>
@@ -100,6 +101,7 @@
                                         </td>
                                         <td>{{ $val->title }}</td>
                                         <td> {{ $val->category->name}} </td>
+                                        <td> {{ $val->user->name}} </td>
                                         <td>
                                             @if ($val->is_active == 1)
                                                 <div class="badge badge-success">
